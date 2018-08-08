@@ -3,22 +3,68 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal"
-    android:padding="@dimen/outer"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <EditText
-        android:id="@+id/entry_text"
-        android:layout_width="0dp"
-        android:layout_weight="1"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter text"
-        android:inputType="text" />
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/none"
+        android:paddingLeft="@dimen/outer"
+        android:paddingRight="@dimen/outer"
+        android:paddingTop="@dimen/outer">
 
-    <Button
-        android:id="@+id/entry_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        <EditText
+            android:id="@+id/entry_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Enter text"
+            android:inputType="text" />
+
+        <Button
+            android:id="@+id/entry_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hello World!" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="@dimen/outer">
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:onClick="onClickOpenWebpageButton"
+            android:text="Open Website" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:onClick="onClickOpenAddressButton"
+            android:text="Open Location in Map" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:onClick="onClickShareTextButton"
+            android:text="Share Text Content" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:onClick="createYourOwn"
+            android:text="Create Your Own" />
+
+    </LinearLayout>
 
 </LinearLayout>

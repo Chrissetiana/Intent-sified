@@ -2,11 +2,13 @@ package com.chrissetiana.intentsified;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,5 +33,26 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    public void onClickOpenWebpageButton(View view) {
+        String url = "https://developer.android.com/guide/components/intents-common";
+        Uri uri = Uri.parse(url);
+        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }
+    }
+
+    public void onClickOpenAddressButton(View view) {
+        Toast.makeText(this, "Open a map when this button is clicked", Toast.LENGTH_SHORT).show();
+    }
+
+    public void onClickShareTextButton(View view) {
+        Toast.makeText(this, "Share text when this is clicked", Toast.LENGTH_LONG).show();
+    }
+
+    public void createYourOwn(View view) {
+        Toast.makeText(this, "Create Your Own Implicit Intent", Toast.LENGTH_SHORT).show();
     }
 }

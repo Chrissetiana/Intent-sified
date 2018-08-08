@@ -2,6 +2,7 @@
 <resources>
     <dimen name="outer">16dp</dimen>
     <dimen name="inner">8dp</dimen>
+    <dimen name="none">0dp</dimen>
 
     <dimen name="text_size">30sp</dimen>
 </resources>
