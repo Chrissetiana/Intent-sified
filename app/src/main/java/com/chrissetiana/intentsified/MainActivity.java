@@ -1,16 +1,16 @@
 package com.chrissetiana.intentsified;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity {
 
-    TextView textView;
+    EditText textView;
     Button button;
 
     @Override
@@ -23,8 +23,12 @@ public class MainActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String text = textView.getText().toString().trim();
                 Context context = MainActivity.this;
-                Toast.makeText(context, "Button clicked!\nTODO: Start a new Activity and pass some data.", Toast.LENGTH_SHORT).show();
+                Class destination = ChildActivity.class;
+                Intent intent = new Intent(context, destination);
+                intent.putExtra(Intent.EXTRA_TEXT, text);
+                startActivity(intent);
             }
         });
     }
