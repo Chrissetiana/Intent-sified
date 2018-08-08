@@ -63,7 +63,7 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:onClick="createYourOwn"
-            android:text="Create Your Own" />
+            android:text="Create Your Own\n(Save Calendar Event)" />
 
     </LinearLayout>
 

@@ -4,13 +4,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.CalendarContract;
 import android.support.v4.app.ShareCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
+
+import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -82,6 +84,27 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void createYourOwn(View view) {
-        Toast.makeText(this, "Create Your Own Implicit Intent", Toast.LENGTH_SHORT).show();
+        String title = "Graduation Ceremony";
+        String location = "Udacity HeadQuarters";
+
+        Calendar beginTime = Calendar.getInstance();
+        beginTime.set(2018, 11, 01, 10, 00, 00);
+        long begin = beginTime.getTimeInMillis();
+
+        Calendar endTime = Calendar.getInstance();
+        beginTime.set(2018, 11, 01, 12, 00, 00);
+        long end = beginTime.getTimeInMillis();
+
+        Intent intent = new Intent(Intent.ACTION_INSERT)
+                .setData(CalendarContract.Events.CONTENT_URI)
+                .putExtra(CalendarContract.Events.TITLE, title)
+                .putExtra(CalendarContract.Events.EVENT_LOCATION, location)
+                .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, begin)
+                .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, end);
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }
+
+        Log.d("MainActivity", intent.toString());
     }
 }
