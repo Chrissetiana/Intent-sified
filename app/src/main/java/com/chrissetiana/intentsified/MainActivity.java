@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
     public void onClickOpenWebpageButton(View view) {
         String url = "https://developer.android.com/guide/components/intents-common";
         Uri uri = Uri.parse(url);
+
         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
         if (intent.resolveActivity(getPackageManager()) != null) {
             startActivity(intent);
@@ -45,7 +46,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onClickOpenAddressButton(View view) {
-        Toast.makeText(this, "Open a map when this button is clicked", Toast.LENGTH_SHORT).show();
+        String address = "1600 Amphitheatre Parkway, CA";
+        Uri.Builder builder = new Uri.Builder();
+        builder.scheme("geo")
+                .path("0,0")
+                .query(address);
+        Uri uri = builder.build();
+
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(uri);
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }
     }
 
     public void onClickShareTextButton(View view) {
