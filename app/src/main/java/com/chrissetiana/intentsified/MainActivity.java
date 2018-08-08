@@ -4,7 +4,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.ShareCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -43,6 +45,8 @@ public class MainActivity extends AppCompatActivity {
         if (intent.resolveActivity(getPackageManager()) != null) {
             startActivity(intent);
         }
+
+        Log.d("MainActivity", uri.toString());
     }
 
     public void onClickOpenAddressButton(View view) {
@@ -58,10 +62,23 @@ public class MainActivity extends AppCompatActivity {
         if (intent.resolveActivity(getPackageManager()) != null) {
             startActivity(intent);
         }
+
+        Log.d("MainActivity", uri.toString());
     }
 
     public void onClickShareTextButton(View view) {
-        Toast.makeText(this, "Share text when this is clicked", Toast.LENGTH_LONG).show();
+        String text = "Sharing the coolest thing I've learned so far. You should check out Udacity and Google's Android Nanodegree!";
+        String type = "text/plain";
+        String title = "Learning How to Share";
+
+        ShareCompat.IntentBuilder
+                .from(this)
+                .setType(type)
+                .setChooserTitle(title)
+                .setText(text)
+                .startChooser();
+
+        Log.d("MainActivity", "\nFrom: " + this + "\nType: " + type + "\nMessage: " + text);
     }
 
     public void createYourOwn(View view) {
