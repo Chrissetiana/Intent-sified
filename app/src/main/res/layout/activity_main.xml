@@ -1,70 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <EditText
+        android:id="@+id/text_entry"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingBottom="@dimen/none"
-        android:paddingLeft="@dimen/outer"
-        android:paddingRight="@dimen/outer"
-        android:paddingTop="@dimen/outer">
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="16dp"
+        android:hint="Enter text"
+        android:inputType="text"
+        app:layout_constraintBottom_toTopOf="@+id/button_web"
+        app:layout_constraintEnd_toStartOf="@+id/button_entry"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <EditText
-            android:id="@+id/entry_text"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:hint="Enter text"
-            android:inputType="text" />
+    <Button
+        android:id="@+id/button_entry"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:text="Hello World!"
+        app:layout_constraintBottom_toBottomOf="@+id/text_entry"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/text_entry"
+        app:layout_constraintTop_toTopOf="@+id/text_entry" />
 
-        <Button
-            android:id="@+id/entry_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Hello World!" />
+    <Button
+        android:id="@+id/button_web"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:onClick="onClickOpenWebpageButton"
+        android:text="Open Website"
+        app:layout_constraintBottom_toBottomOf="@id/text_entry"
+        app:layout_constraintEnd_toEndOf="@id/button_entry"
+        app:layout_constraintStart_toStartOf="@id/text_entry"
+        app:layout_constraintTop_toBottomOf="@+id/text_entry" />
 
-    </LinearLayout>
+    <Button
+        android:id="@+id/button_map"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:onClick="onClickOpenAddressButton"
+        android:text="Open Location in Map"
+        app:layout_constraintBottom_toTopOf="@+id/button_share"
+        app:layout_constraintEnd_toEndOf="@id/button_web"
+        app:layout_constraintStart_toStartOf="@id/button_web"
+        app:layout_constraintTop_toBottomOf="@+id/button_web" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="@dimen/outer">
+    <Button
+        android:id="@+id/button_share"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:onClick="onClickShareTextButton"
+        android:text="Share Text Content"
+        app:layout_constraintBottom_toTopOf="@+id/button_calendar"
+        app:layout_constraintEnd_toEndOf="@id/button_map"
+        app:layout_constraintStart_toStartOf="@id/button_map"
+        app:layout_constraintTop_toBottomOf="@+id/button_map" />
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:onClick="onClickOpenWebpageButton"
-            android:text="Open Website" />
+    <Button
+        android:id="@+id/button_calendar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:onClick="createYourOwn"
+        android:text="Create Your Own\n(Save Calendar Event)"
+        app:layout_constraintEnd_toEndOf="@id/button_share"
+        app:layout_constraintStart_toStartOf="@id/button_share"
+        app:layout_constraintTop_toBottomOf="@+id/button_share" />
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:onClick="onClickOpenAddressButton"
-            android:text="Open Location in Map" />
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:onClick="onClickShareTextButton"
-            android:text="Share Text Content" />
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:onClick="createYourOwn"
-            android:text="Create Your Own\n(Save Calendar Event)" />
-
-    </LinearLayout>
-
-</LinearLayout>
+</android.support.constraint.ConstraintLayout>

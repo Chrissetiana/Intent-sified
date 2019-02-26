@@ -12,4 +12,5 @@
         android:layout_height="wrap_content"
         android:text="This is default text. Hopefully it changes."
         android:textSize="@dimen/text_size" />
+
 </FrameLayout>
