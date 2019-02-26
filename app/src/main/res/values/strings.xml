@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Intentsified</string>
+    <string name="string_website">Open Website</string>
+    <string name="string_map">Open Location in Map</string>
+    <string name="string_share">Share Text Content</string>
+    <string name="string_calendar_event">Create Your Own (Save Calendar Event)</string>
+    <string name="hint_entry">Enter text</string>
 </resources>
