@@ -79,6 +79,17 @@
         android:text="@string/string_calendar_event"
         app:layout_constraintEnd_toEndOf="@id/button_share"
         app:layout_constraintStart_toStartOf="@id/button_share"
+        app:layout_constraintBottom_toTopOf="@id/button_camera"
         app:layout_constraintTop_toBottomOf="@+id/button_share" />
+
+    <Button
+        android:id="@+id/button_camera"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:onClick="onClickTakePicture"
+        android:text="@string/string_picture"
+        app:layout_constraintEnd_toEndOf="@id/button_calendar"
+        app:layout_constraintStart_toStartOf="@id/button_calendar"
+        app:layout_constraintTop_toBottomOf="@id/button_calendar" />
 
 </android.support.constraint.ConstraintLayout>
