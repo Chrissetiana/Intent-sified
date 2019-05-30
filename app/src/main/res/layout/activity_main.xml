@@ -40,7 +40,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:onClick="onClickOpenWebpageButton"
+        android:onClick="onClickOpenWebpage"
         android:text="@string/string_website"
         app:layout_constraintBottom_toBottomOf="@id/text_entry"
         app:layout_constraintEnd_toEndOf="@id/button_entry"
@@ -52,7 +52,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:onClick="onClickOpenAddressButton"
+        android:onClick="onClickOpenAddress"
         android:text="@string/string_map"
         app:layout_constraintBottom_toTopOf="@+id/button_share"
         app:layout_constraintEnd_toEndOf="@id/button_web"
@@ -64,7 +64,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:onClick="onClickShareTextButton"
+        android:onClick="onClickShareText"
         android:text="@string/string_share"
         app:layout_constraintBottom_toTopOf="@+id/button_calendar"
         app:layout_constraintEnd_toEndOf="@id/button_map"
@@ -75,12 +75,23 @@
         android:id="@+id/button_calendar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:onClick="createYourOwn"
-        android:text="@string/string_calendar_event"
+        android:onClick="onClickSaveToCalendar"
+        android:text="@string/string_calendar"
         app:layout_constraintEnd_toEndOf="@id/button_share"
         app:layout_constraintStart_toStartOf="@id/button_share"
-        app:layout_constraintBottom_toTopOf="@id/button_camera"
+        app:layout_constraintBottom_toTopOf="@id/button_email"
         app:layout_constraintTop_toBottomOf="@+id/button_share" />
+
+    <Button
+        android:id="@+id/button_email"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:onClick="onClickSendEmail"
+        android:text="@string/string_email"
+        app:layout_constraintBottom_toTopOf="@id/button_camera"
+        app:layout_constraintEnd_toEndOf="@id/button_calendar"
+        app:layout_constraintStart_toStartOf="@id/button_calendar"
+        app:layout_constraintTop_toBottomOf="@id/button_calendar" />
 
     <Button
         android:id="@+id/button_camera"
@@ -88,8 +99,8 @@
         android:layout_height="wrap_content"
         android:onClick="onClickTakePicture"
         android:text="@string/string_picture"
-        app:layout_constraintEnd_toEndOf="@id/button_calendar"
-        app:layout_constraintStart_toStartOf="@id/button_calendar"
-        app:layout_constraintTop_toBottomOf="@id/button_calendar" />
+        app:layout_constraintEnd_toEndOf="@id/button_email"
+        app:layout_constraintStart_toStartOf="@id/button_email"
+        app:layout_constraintTop_toBottomOf="@id/button_email" />
 
 </android.support.constraint.ConstraintLayout>

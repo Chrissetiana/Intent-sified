@@ -47,8 +47,8 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void onClickOpenWebpageButton(View view) {
-        String url = "https://developer.android.com/guide/components/intents-common";
+    public void onClickOpenWebpage(View view) {
+        String url = "https://chrissetiana.github.io";
         Uri uri = Uri.parse(url);
 
         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
@@ -60,8 +60,8 @@ public class MainActivity extends AppCompatActivity {
         Log.d(LOG_TAG, uri.toString());
     }
 
-    public void onClickOpenAddressButton(View view) {
-        String address = "1600 Amphitheatre Parkway, CA";
+    public void onClickOpenAddress(View view) {
+        String address = "Abuja, Nigeria";
         Uri.Builder builder = new Uri.Builder();
         builder.scheme("geo")
                 .path("0,0")
@@ -78,8 +78,8 @@ public class MainActivity extends AppCompatActivity {
         Log.d(LOG_TAG, uri.toString());
     }
 
-    public void onClickShareTextButton(View view) {
-        String text = "Sharing the coolest thing I've learned so far. You should check out Udacity and Google's Android Nanodegree!";
+    public void onClickShareText(View view) {
+        String text = "Sharing the coolest thing I've learned so far.";
         String type = "text/plain";
         String title = "Learning How to Share";
 
@@ -93,16 +93,16 @@ public class MainActivity extends AppCompatActivity {
         Log.d(LOG_TAG, "\nFrom: " + this + "\nType: " + type + "\nMessage: " + text);
     }
 
-    public void createYourOwn(View view) {
-        String title = "Graduation Ceremony";
-        String location = "Udacity HeadQuarters";
+    public void onClickSaveToCalendar(View view) {
+        String title = "Birthday Celebration";
+        String location = "My House";
 
         Calendar beginTime = Calendar.getInstance();
-        beginTime.set(2018, 11, 01, 10, 00, 00);
+        beginTime.set(2019, 11, 13, 00, 00, 00);
         long begin = beginTime.getTimeInMillis();
 
         Calendar endTime = Calendar.getInstance();
-        beginTime.set(2018, 11, 01, 12, 00, 00);
+        beginTime.set(2019, 11, 13, 11, 59, 59);
         long end = endTime.getTimeInMillis();
 
         Intent intent = new Intent(Intent.ACTION_INSERT)
@@ -119,11 +119,22 @@ public class MainActivity extends AppCompatActivity {
         Log.d(LOG_TAG, intent.toString());
     }
 
+    public void onClickSendEmail(View view) {
+        Intent intent = new Intent();
+        intent.setData(Uri.parse("mailto:"));
+        intent.putExtra(Intent.EXTRA_SUBJECT, "Happy Birthday");
+        intent.putExtra(Intent.EXTRA_TEXT, "You are invited to my birthday!");
+
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }
+    }
+
     public void onClickTakePicture(View view) {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
         if (intent.resolveActivity(getPackageManager()) != null) {
-            startActivityForResult(intent, 1);
+            startActivityForResult(intent, REQUEST_CODE);
         }
 
         Log.d(LOG_TAG, "Camera launched");
