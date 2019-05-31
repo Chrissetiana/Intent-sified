@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.AlarmClock;
 import android.provider.CalendarContract;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
@@ -142,10 +143,26 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
         if (requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
             Bundle bundle = data.getExtras();
             Bitmap bitmap = (Bitmap) bundle.get("data");
             imageView.setImageBitmap(bitmap);
         }
+    }
+
+    public void onClickSetReminder(View view) {
+        Intent intent = new Intent(AlarmClock.ACTION_SET_ALARM);
+        intent.putExtra(AlarmClock.EXTRA_MESSAGE, "Wake up!");
+        intent.putExtra(AlarmClock.EXTRA_HOUR, 5);
+        intent.putExtra(AlarmClock.EXTRA_MINUTES, 30);
+        intent.putExtra(AlarmClock.EXTRA_ALARM_SNOOZE_DURATION, 5);
+
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }
+
+        Log.d(LOG_TAG, "Set up alarm");
     }
 }

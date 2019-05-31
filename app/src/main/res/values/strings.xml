@@ -8,6 +8,7 @@
     <string name="string_calendar">Save Calendar Event</string>
     <string name="string_email">Send Email</string>
     <string name="string_picture">Take a picture</string>
+    <string name="string_reminder">Set Reminder</string>
 
     <string name="string_result">This is default text. Hopefully it changes.</string>
     <string name="string_your_image">Your picture goes here</string>
