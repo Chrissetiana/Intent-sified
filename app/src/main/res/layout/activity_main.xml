@@ -108,11 +108,22 @@
         android:id="@+id/button_reminder"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
         android:onClick="onClickSetReminder"
         android:text="@string/string_reminder"
+        app:layout_constraintBottom_toTopOf="@id/button_call"
         app:layout_constraintEnd_toEndOf="@+id/button_camera"
         app:layout_constraintStart_toStartOf="@+id/button_camera"
         app:layout_constraintTop_toBottomOf="@id/button_camera" />
+
+    <Button
+        android:id="@+id/button_call"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:onClick="onClickCallNumber"
+        android:text="@string/string_call"
+        app:layout_constraintEnd_toEndOf="@+id/button_reminder"
+        app:layout_constraintStart_toStartOf="@+id/button_reminder"
+        app:layout_constraintTop_toBottomOf="@id/button_reminder" />
 
 </android.support.constraint.ConstraintLayout>

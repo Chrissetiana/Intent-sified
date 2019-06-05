@@ -165,4 +165,16 @@ public class MainActivity extends AppCompatActivity {
 
         Log.d(LOG_TAG, "Set up alarm");
     }
+
+    public void onClickCallNumber(View view) {
+        Intent intent = new Intent(Intent.ACTION_DIAL);
+        String number = "tel:+2348146984900";
+        intent.setData(Uri.parse(number));
+
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }
+
+        Log.d(LOG_TAG, "Dialing " + number);
+    }
 }

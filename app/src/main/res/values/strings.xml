@@ -1,15 +1,16 @@
 <resources>
     <string name="app_name">Intentsified</string>
 
-    <string name="hint_entry">Enter text</string>
-    <string name="string_website">Open Website</string>
-    <string name="string_map">Open Location in Map</string>
-    <string name="string_share">Share Text Content</string>
-    <string name="string_calendar">Save Calendar Event</string>
-    <string name="string_email">Send Email</string>
-    <string name="string_picture">Take a picture</string>
-    <string name="string_reminder">Set Reminder</string>
-
     <string name="string_result">This is default text. Hopefully it changes.</string>
     <string name="string_your_image">Your picture goes here</string>
+
+    <string name="hint_entry">Enter text</string>
+    <string name="string_website">Link to Website</string>
+    <string name="string_map">Open in Map</string>
+    <string name="string_share">Share Text</string>
+    <string name="string_calendar">Save Reminder</string>
+    <string name="string_email">Send Email</string>
+    <string name="string_picture">Take a Picture</string>
+    <string name="string_reminder">Set Reminder</string>
+    <string name="string_call">Call Number</string>
 </resources>
