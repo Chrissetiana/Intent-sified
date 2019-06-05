@@ -13,4 +13,5 @@
     <string name="string_picture">Take a Picture</string>
     <string name="string_reminder">Set Reminder</string>
     <string name="string_call">Call Number</string>
+    <string name="string_sms">Compose message</string>
 </resources>

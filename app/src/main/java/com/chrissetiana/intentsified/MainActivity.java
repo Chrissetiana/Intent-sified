@@ -177,4 +177,26 @@ public class MainActivity extends AppCompatActivity {
 
         Log.d(LOG_TAG, "Dialing " + number);
     }
+
+    public void onClickComposeMessage(View view) {
+        String recipient = "+2348146984900";
+        String message = "This is a sample message";
+
+        Intent intent = new Intent(Intent.ACTION_SENDTO);
+//        intent.setType("vnd.android-dir/mms-sms"); // no need?
+        intent.setData(Uri.parse("smsto:" + recipient));
+//        intent.setType(HTTP.PLAIN_TEXT_TYPE); // for mms
+//        intent.putExtra(Intent.EXTRA_STREAM, attachment); // for attachments
+        intent.putExtra("sms_body", message);
+
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }
+
+        // Another way
+//        SmsManager smsManager = SmsManager.getDefault();
+//        smsManager.sendTextMessage(recipient, null, message, null, null);
+
+        Log.d(LOG_TAG, "Sending an sms");
+    }
 }
