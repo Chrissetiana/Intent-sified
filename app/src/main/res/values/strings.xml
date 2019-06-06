@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Intentsified</string>
 
-    <string name="string_result">This is default text. Hopefully it changes.</string>
+    <string name="string_result">This is the default text</string>
     <string name="string_your_image">Your picture goes here</string>
 
     <string name="hint_entry">Enter text</string>

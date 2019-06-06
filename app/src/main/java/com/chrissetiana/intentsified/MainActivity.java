@@ -3,11 +3,14 @@ package com.chrissetiana.intentsified;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.AlarmClock;
 import android.provider.CalendarContract;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ShareCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -17,7 +20,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
     private ImageView imageView;
     private EditText textView;
+    private String imagePath = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        imageView = findViewById(R.id.image_view);
     }
 
     public void onClickOpenWebpage(View view) {
@@ -58,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         }
 
-        Log.d(LOG_TAG, uri.toString());
+        Log.d(LOG_TAG, "Redirecting to " + uri.toString());
     }
 
     public void onClickOpenAddress(View view) {
@@ -76,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         }
 
-        Log.d(LOG_TAG, uri.toString());
+        Log.d(LOG_TAG, "Locating " + uri.toString());
     }
 
     public void onClickShareText(View view) {
@@ -121,18 +129,28 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onClickSendEmail(View view) {
+        String address = "chrissetiana@gmail.com";
+        String subject = "Happy Birthday";
+        String message = "You are invited to my birthday!";
+
         Intent intent = new Intent();
-        intent.setData(Uri.parse("mailto:"));
-        intent.putExtra(Intent.EXTRA_SUBJECT, "Happy Birthday");
-        intent.putExtra(Intent.EXTRA_TEXT, "You are invited to my birthday!");
+        intent.setData(Uri.parse("mailto:" + address));
+        intent.putExtra(Intent.EXTRA_SUBJECT, subject);
+        intent.putExtra(Intent.EXTRA_TEXT, message);
 
         if (intent.resolveActivity(getPackageManager()) != null) {
             startActivity(intent);
         }
+
+        Log.d(LOG_TAG, "Sending email to " + address);
     }
 
     public void onClickTakePicture(View view) {
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        File file = getFile();
+        Uri uri = Uri.fromFile(file);
+
+        Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
 
         if (intent.resolveActivity(getPackageManager()) != null) {
             startActivityForResult(intent, REQUEST_CODE);
@@ -141,35 +159,61 @@ public class MainActivity extends AppCompatActivity {
         Log.d(LOG_TAG, "Camera launched");
     }
 
+    @NonNull
+    private File getFile() {
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String fileName = timeStamp + ".jpg";
+
+        File storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+        imagePath = storageDir.getAbsolutePath() + "/" + fileName;
+
+        return new File(imagePath);
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
+            // For small thumbnail
             Bundle bundle = data.getExtras();
             Bitmap bitmap = (Bitmap) bundle.get("data");
             imageView.setImageBitmap(bitmap);
+
+            // For large photo
+            File file = new File(imagePath);
+
+            if (file.exists()) {
+                Bitmap bitmap2 = BitmapFactory.decodeFile(file.getAbsolutePath());
+                imageView.setImageBitmap(bitmap2);
+            }
         }
     }
 
     public void onClickSetReminder(View view) {
+        String subject = "Wake up!";
+        int hour = 5;
+        int minute = 30;
+        int snooze = 5;
+
         Intent intent = new Intent(AlarmClock.ACTION_SET_ALARM);
-        intent.putExtra(AlarmClock.EXTRA_MESSAGE, "Wake up!");
-        intent.putExtra(AlarmClock.EXTRA_HOUR, 5);
-        intent.putExtra(AlarmClock.EXTRA_MINUTES, 30);
-        intent.putExtra(AlarmClock.EXTRA_ALARM_SNOOZE_DURATION, 5);
+        intent.putExtra(AlarmClock.EXTRA_MESSAGE, subject);
+        intent.putExtra(AlarmClock.EXTRA_HOUR, hour);
+        intent.putExtra(AlarmClock.EXTRA_MINUTES, minute);
+        intent.putExtra(AlarmClock.EXTRA_ALARM_SNOOZE_DURATION, snooze);
 
         if (intent.resolveActivity(getPackageManager()) != null) {
             startActivity(intent);
         }
 
-        Log.d(LOG_TAG, "Set up alarm");
+        Log.d(LOG_TAG, "Setting up alarm for " + subject + " at " + hour + ":" + minute);
     }
 
     public void onClickCallNumber(View view) {
+        String number = "+2348146984900";
+
         Intent intent = new Intent(Intent.ACTION_DIAL);
-        String number = "tel:+2348146984900";
-        intent.setData(Uri.parse(number));
+        intent.setData(Uri.parse("tel:" + number));
 
         if (intent.resolveActivity(getPackageManager()) != null) {
             startActivity(intent);
@@ -180,13 +224,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void onClickComposeMessage(View view) {
         String recipient = "+2348146984900";
-        String message = "This is a sample message";
+        String message = "Hello, how are you?";
 
         Intent intent = new Intent(Intent.ACTION_SENDTO);
-//        intent.setType("vnd.android-dir/mms-sms"); // no need?
         intent.setData(Uri.parse("smsto:" + recipient));
-//        intent.setType(HTTP.PLAIN_TEXT_TYPE); // for mms
-//        intent.putExtra(Intent.EXTRA_STREAM, attachment); // for attachments
         intent.putExtra("sms_body", message);
 
         if (intent.resolveActivity(getPackageManager()) != null) {
@@ -197,6 +238,6 @@ public class MainActivity extends AppCompatActivity {
 //        SmsManager smsManager = SmsManager.getDefault();
 //        smsManager.sendTextMessage(recipient, null, message, null, null);
 
-        Log.d(LOG_TAG, "Sending an sms");
+        Log.d(LOG_TAG, "Sending an sms to " + recipient);
     }
 }
