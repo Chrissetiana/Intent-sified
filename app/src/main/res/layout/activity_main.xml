@@ -49,7 +49,7 @@
         android:id="@+id/button_map"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:onClick="onClickOpenAddress"
+        android:onClick="onClickOpenMap"
         android:text="@string/string_map"
         app:layout_constraintBottom_toTopOf="@+id/button_share"
         app:layout_constraintEnd_toEndOf="@id/button_web"
